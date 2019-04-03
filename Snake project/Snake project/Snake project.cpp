@@ -194,14 +194,14 @@ void initialize_play_field()
 	head_y_position = play_field_height / 2;
 	play_field[head_x_position + head_y_position * play_field_height] = 1;
 
-	// верхняя и нижняя стена
+	// левая и правая стенка
 	for (int x = 0; x < play_field_width; x++)
 	{    //берет play_field[0] и play_field [380] и одновременно заполняет 'X' и тд, до play_field[19] и play_field [399], т.е верхняя и нижняя строка
 		play_field[x] = -1;
 		play_field[x + (play_field_height - 1) * play_field_width] = -1;
 	}
 
-	// левая и правая стенка
+	// верхняя и нижняя стена
 	for (int y = 0; y < play_field_height; y++)
 	{    //тоже самое но берет play_field[0] и play_field[19], затем play_field[20] и play_field[39] т.е. пропуская 18 "игровых полей" с каждой итерацией
 		play_field[0 + y * play_field_height] = -1;
