@@ -231,7 +231,7 @@ void print_play_field()
 char get_play_field_value(int value)
 {
 	// змейка
-	if (value > 0) return 'o';
+	if (value > 0) return '*';
 
 	switch (value) {
 		// стена
