@@ -1,4 +1,4 @@
-﻿/*
+/*
 Игра "Змейка"
 
 Корчинов Кирилл Игоревич
@@ -49,6 +49,7 @@ void move_snake(int x, int y);
 void update_field();
 void generate_food();
 char get_play_field_value(int value);
+void generate_rock();
 
 
 
@@ -62,7 +63,6 @@ int main()
 
 
 	run();
-	
 }
 
 void run()
@@ -100,11 +100,11 @@ void run()
 		print_play_field();
 		switch (difficulty)
 		{
-		case 1: Sleep(500);
+		case 1:Sleep(500);
 			break;
-		case 2: Sleep(400);
+		case 2:Sleep(400);
 			break;
-		case 3: Sleep(200);
+		case 3:Sleep(200);
 			break;
 		}
 	}
@@ -164,6 +164,24 @@ void generate_food() {
 	play_field[x + y * play_field_width] = -2;
 }
 
+void generate_rock() {
+	int x = 0;
+	int y = 0;
+	do
+	{
+
+		srand(time(NULL));
+		x = rand() % (play_field_width - 2) + 1;
+		y = rand() % (play_field_height - 2) + 1;
+
+		// проверка на свободность поля
+	} while (play_field[x + y * play_field_width] != 0);
+
+	// положить камень
+	play_field[x + y * play_field_width] = -3;
+}
+
+
 // обновление игр. поля
 void update_field()
 {
@@ -193,10 +211,10 @@ void initialize_play_field()
 	head_x_position = play_field_width / 2;
 	head_y_position = play_field_height / 2;
 	play_field[head_x_position + head_y_position * play_field_height] = 1;
-
-	// левая и правая стенка
+// левая и правая стенка
+	
 	for (int x = 0; x < play_field_width; x++)
-	{    //берет play_field[0] и play_field [380] и одновременно заполняет 'X' и тд, до play_field[19] и play_field [399], т.е левая и правая стенка
+	{    //берет play_field[0] и play_field [380] и одновременно заполняет 'X' и тд, до play_field[19] и play_field [399], т.е верхняя и нижняя строка
 		play_field[x] = -1;
 		play_field[x + (play_field_height - 1) * play_field_width] = -1;
 	}
@@ -210,6 +228,18 @@ void initialize_play_field()
 
 	// создание изначальной еды
 	generate_food();
+	if (difficulty == 1)
+	{
+		generate_rock(); generate_rock(); generate_rock();
+	}
+	else if (difficulty == 2)
+	{
+		generate_rock(); generate_rock(); generate_rock(); generate_rock(); generate_rock(); generate_rock();
+	}
+	else if (difficulty == 3)
+	{
+		generate_rock(); generate_rock(); generate_rock(); generate_rock(); generate_rock(); generate_rock(); generate_rock(); generate_rock(); generate_rock();
+	}
 }
 
 // вывод поля
@@ -238,5 +268,7 @@ char get_play_field_value(int value)
 	case -1: return 'O';
 		// еда
 	case -2: return '@';
+		//камень
+	case -3:return 'X';
 	}
 }
