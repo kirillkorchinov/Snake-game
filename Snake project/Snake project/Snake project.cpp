@@ -196,7 +196,7 @@ void initialize_play_field()
 
 	// левая и правая стенка
 	for (int x = 0; x < play_field_width; x++)
-	{    //берет play_field[0] и play_field [380] и одновременно заполняет 'X' и тд, до play_field[19] и play_field [399], т.е верхняя и нижняя строка
+	{    //берет play_field[0] и play_field [380] и одновременно заполняет 'X' и тд, до play_field[19] и play_field [399], т.е левая и правая стенка
 		play_field[x] = -1;
 		play_field[x + (play_field_height - 1) * play_field_width] = -1;
 	}
