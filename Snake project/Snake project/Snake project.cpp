@@ -59,6 +59,7 @@ int main()
 	cout << "1 - Easy" << endl;
 	cout << "2 - Medium" << endl;
 	cout << "3 - Hard" << endl;
+	cout << "( O - wall, @ - fruit, X - rock)" << endl;
 	cout << "Enter option ( 1 - 3 ): "; cin >> difficulty; cout << endl;
 
 
@@ -100,9 +101,9 @@ void run()
 		print_play_field();
 		switch (difficulty)
 		{
-		case 1:Sleep(500);
+		case 1:Sleep(400);
 			break;
-		case 2:Sleep(400);
+		case 2:Sleep(300);
 			break;
 		case 3:Sleep(200);
 			break;
@@ -110,7 +111,7 @@ void run()
 	}
 
 	// конец игры
-	cout << "!Game over!" << endl << "Your score is: " << score;
+	cout << "!-----Game over-----!" << endl << "Your score is: " << score;
 
 
 	cin.ignore();
