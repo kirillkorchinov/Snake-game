@@ -230,8 +230,14 @@ void print_play_field()
 ```cpp
 get_play_field_value(int value)
 {
+	find_max(play_field);
 	// змейка
-	if (value > 0) return '*';
+	if (direction == 1 && value == max && value != 0) return '^';
+	if (direction == 2 && value == max && value != 0) return '>';
+	if (direction == 3 && value == max && value != 0) return 'V';
+	if (direction == 4 && value == max && value != 0) return '<';
+
+	if (value > 0 && value < max) return '*';
 
 	switch (value) {
 		// стена
@@ -240,6 +246,9 @@ get_play_field_value(int value)
 	case -2: return '@';
 		//камень
 	case -3:return 'X';
-	}
 }
 ```
+
+```find_max()``` возвращает наибольший элемент элемент массива (голова змейки) и выводит стрелку в соответствии с движением змейки.
+
+---
