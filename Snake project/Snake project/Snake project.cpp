@@ -1,9 +1,6 @@
 /*
 Игра "Змейка"
-
 Корчинов Кирилл Игоревич
-
-
 */
 
 
@@ -19,6 +16,7 @@
 
 using namespace std;
 
+int max = 0;
 // инфо о поле
 const int play_field_width = 20;
 const int play_field_height = 20;
@@ -34,6 +32,8 @@ int head_y_position;
 int direction = 1;
 
 int snake_length = 3;
+
+
 int score = 0;
 
 
@@ -50,7 +50,8 @@ void update_field();
 void generate_food();
 char get_play_field_value(int value);
 void generate_rock();
-
+void find_max(int arr[]);
+int find_max_pos(int arr[], int m);
 
 
 int main()
@@ -61,6 +62,7 @@ int main()
 	cout << "3 - Hard" << endl;
 	cout << "( O - wall, @ - fruit, X - rock)" << endl;
 	cout << "Enter option ( 1 - 3 ): "; cin >> difficulty; cout << endl;
+	cout << "Loading..." << endl;
 
 
 	run();
@@ -212,8 +214,8 @@ void initialize_play_field()
 	head_x_position = play_field_width / 2;
 	head_y_position = play_field_height / 2;
 	play_field[head_x_position + head_y_position * play_field_height] = 1;
-// левая и правая стенка
-	
+	// левая и правая стенка
+
 	for (int x = 0; x < play_field_width; x++)
 	{    //берет play_field[0] и play_field [380] и одновременно заполняет 'X' и тд, до play_field[19] и play_field [399], т.е верхняя и нижняя строка
 		play_field[x] = -1;
@@ -261,8 +263,14 @@ void print_play_field()
 
 char get_play_field_value(int value)
 {
+	find_max(play_field);
 	// змейка
-	if (value > 0) return '*';
+	if (direction == 1 && value == max && value != 0) return '^';
+	if (direction == 2 && value == max && value != 0) return '>';
+	if (direction == 3 && value == max && value != 0) return 'V';
+	if (direction == 4 && value == max && value != 0) return '<';
+
+	if (value > 0 && value < max) return '*';
 
 	switch (value) {
 		// стена
@@ -272,4 +280,15 @@ char get_play_field_value(int value)
 		//камень
 	case -3:return 'X';
 	}
+}
+
+void find_max(int arr[])
+{
+	max = arr[0];
+	for (int i = 0; i < 400-1; i++)
+	{
+		
+		if (arr[i] > max)max = arr[i];
+	}
+	
 }
