@@ -32,8 +32,62 @@
 
 ---
 Основной функцией является ```run()```, в которой реализуется игра (с использованием других подфункций). 
+```cpp
+void run()
+{
+	// создание поля
+	initialize_play_field();
+	game_running = true;
+	while (game_running)
+	{
+
+		if (_kbhit())
+		{
+			char key = _getch();
+			switch (key) {
+			case 'w':
+				if (direction != 3) direction = 1;
+				break;
+			case 'd':
+				if (direction != 4) direction = 2;
+				break;
+			case 's':
+				if (direction != 1) direction = 3;
+				break;
+			case 'a':
+				if (direction != 2) direction = 4;
+				break;
+			}
+
+
+		}
+		// обновить поле
+		update_field();
+		system("cls");
+		// вывод поля
+		print_play_field();
+		switch (difficulty)
+		{
+		case 1:Sleep(400);
+			break;
+		case 2:Sleep(300);
+			break;
+		case 3:Sleep(200);
+			break;
+		}
+	}
+
+	// конец игры
+	cout << "!-----Game over-----!" << endl << "Your score is: " << score;
+
+
+	cin.ignore();
+}
+
+```
 
 В начале идет инициализация поля без вывода через функцию ```initialize_play_field()```, в которой голова змейки помещается в середину игрового поля и генерируется фрукт:
+
 ```cpp
 void initialize_play_field()
 {
@@ -60,7 +114,7 @@ void initialize_play_field()
 	generate_food();
 
 ```
-Еда генерируется с помощью ```generate_food()```:
+Еда генерируется с помощью ```generate_food()``` путем подбора случайных координат исключая границы поля:
 ```cpp
 void generate_food() {
 	int x = 0;
