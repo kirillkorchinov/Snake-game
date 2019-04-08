@@ -51,7 +51,7 @@ void generate_food();
 char get_play_field_value(int value);
 void generate_rock();
 void find_max(int arr[]);
-int find_max_pos(int arr[], int m);
+
 
 
 int main()
